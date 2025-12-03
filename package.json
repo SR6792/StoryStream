@@ -1,0 +1,27 @@
+{
+  "name": "storystream",
+  "version": "1.0.0",
+  "description": "StoryConnect is a web-based platform where users can write and share short stories with the community, as well as communicate with other users through a simple database-driven chat system.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SR6792/StoryStream.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SR6792/StoryStream/issues"
+  },
+  "homepage": "https://github.com/SR6792/StoryStream#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "sqlite3": "^5.1.7"
+  }
+}
