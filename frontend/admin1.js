@@ -1,6 +1,4 @@
 const a11= document.querySelector(".getpost");
-const btn4 = document.querySelector(".d4");
-btn4.style.borderBottom='5px solid black'
 async function loadSuggestion(){//to load all post
     a11.innerHTML='';
     a11.style.overflowY='scroll';
@@ -12,7 +10,7 @@ async function loadSuggestion(){//to load all post
                 <h2>${p.name}</h2>
                 <h3>${p.adm_no}</h3>
                 <p>${p.desc1}</p>
-                <p>Status: ${p.status}</p>
+                <p>${p.status}</p>
             `;
         post.style.justifyItems='center';
         post.style.width='35%';
@@ -23,9 +21,8 @@ async function loadSuggestion(){//to load all post
         post.style.overflowY='scroll';
         post.style.scrollbarWidth='none';
         post.style.borderRadius = '20px';
-        
         post.style.backgroundColor=' White';
-
+        
         a11.appendChild(post);
     });
 }
@@ -92,11 +89,42 @@ btn.addEventListener('click', async (event) => {
 const btn1 = document.querySelector(".d1");
 const btn2 = document.querySelector(".d2");
 const btn3 = document.querySelector(".d3");
+const btn4 = document.querySelector(".d4");
+const btn5 = document.querySelector(".d5");
+const btn6 = document.querySelector(".d6");
+
+btn4.style.borderBottom='solid 5px black';
 
 async function loadCat(cat){
   a11.innerHTML='';
     a11.style.overflowY='scroll';
     const data = await fetch(`http://localhost:2000/all/${cat}`);
+        const posts = await data.json();
+        posts.forEach(p=>{
+            const post = document.createElement('div');
+            post.innerHTML = `
+                <h2>${p.name}</h2>
+                <h3>${p.adm_no}</h3>
+                <p>${p.desc1}</p>
+                <p>${p.status}</p>
+            `;
+        post.style.justifyItems='center';
+        post.style.width='35%';
+        post.style.height='40%';
+        post.style.padding='20px';
+        post.style.border='3px solid black';
+        post.style.margin='20px 20px';
+        post.style.overflowY='scroll';
+        post.style.scrollbarWidth='none';
+        a11.appendChild(post);
+    });
+}
+
+//function to load status
+async function loadStatus(status){
+  a11.innerHTML='';
+    a11.style.overflowY='scroll';
+    const data = await fetch(`http://localhost:2000/${status}`);
         const posts = await data.json();
         posts.forEach(p=>{
             const post = document.createElement('div');
@@ -124,6 +152,8 @@ btn1.addEventListener('click', () => {
   btn2.style.borderBottom = 'none';
   btn3.style.borderBottom = 'none';
   btn4.style.borderBottom = 'none';
+  btn5.style.borderBottom = 'none';
+  btn6.style.borderBottom = 'none';
 });
 
 btn2.addEventListener('click', () => {
@@ -132,6 +162,8 @@ btn2.addEventListener('click', () => {
   btn1.style.borderBottom = 'none';
   btn3.style.borderBottom = 'none';
   btn4.style.borderBottom = 'none';
+  btn5.style.borderBottom = 'none';
+  btn6.style.borderBottom = 'none';
 });
 
 btn3.addEventListener('click', () => {
@@ -140,42 +172,41 @@ btn3.addEventListener('click', () => {
   btn1.style.borderBottom = 'none';
   btn2.style.borderBottom = 'none';
   btn4.style.borderBottom = 'none';
+  btn5.style.borderBottom = 'none';
+  btn6.style.borderBottom = 'none';
 });
 
-btn4.addEventListener('click',()=>{
+btn4.addEventListener('click', () => {
   loadSuggestion();
-  btn4.style.borderBottom = '5px solid black';
+  btn3.style.borderBottom = 'none';
   btn1.style.borderBottom = 'none';
   btn2.style.borderBottom = 'none';
+  btn4.style.borderBottom = '5px solid black';
+  btn5.style.borderBottom = 'none';
+  btn6.style.borderBottom = 'none';
+});
+
+btn5.addEventListener('click', () => {
+  loadStatus("approved");
   btn3.style.borderBottom = 'none';
-})
-//check if  logged in
-let p;
-function checkLoginStatus(){
-  const user = localStorage.getItem('role');
+  btn1.style.borderBottom = 'none';
+  btn2.style.borderBottom = 'none';
+  btn4.style.borderBottom = 'none';
+  btn5.style.borderBottom = '5px solid black';
+  btn6.style.borderBottom = 'none';
+});
+btn6.addEventListener('click', () => {
+  loadStatus("denied");
+  btn3.style.borderBottom = 'none';
+  btn1.style.borderBottom = 'none';
+  btn2.style.borderBottom = 'none';
+  btn4.style.borderBottom = 'none';
+  btn5.style.borderBottom = 'none';
+  btn6.style.borderBottom = '5px solid black';
+});
 
-  if(user=='admin'){
-    console.log("Welcome Admin");
-    p=0;
-  }
-  else if(user=='user'){
-    console.log("Welcome guest");
-    p=1;
-  }
-  else{
-    console.log("Log in first");
-    p=2;
-  }
-}
-
-const btns = document.querySelector(".btns");
-checkLoginStatus()
-if(p==1){
-  btns.innerHTML='<span> Hi User <button class="logout">Logout</button> </span>';
-}
-
-const logout_btn = document.querySelector(".logout");
+const logout_btn = document.querySelector(".b2");
 logout_btn.addEventListener('click',()=>{
-  localStorage.clear('role');
-  window.location.reload();
+  localStorage.removeItem('role');
+  window.location.href='index.html';
 })

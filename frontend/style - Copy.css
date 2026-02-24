@@ -3,9 +3,6 @@
     padding: 0%;
     margin: 0%;
     font-family: 'Poppins';
-}
-
-body,.type1{
     background-color:#b2d7f0;
 }
 .category{
@@ -142,7 +139,7 @@ body,.type1{
 .type1{
     display: flex;
     gap:40px;
-    margin-top: 20px;
+    margin:20px 20px;
     border-radius: 20px;
     padding-top:20px;
     padding-left:20px;
@@ -151,14 +148,10 @@ body,.type1{
     width:840px;
     height:100px;
 }
-.d1,.d2,.d3,.d4{
+.d1,.d2,.d3{
     cursor: pointer;
 }
-.d1:hover,.d2:hover,.d3:hover,.d4:hover{
+.d1:hover,.d2:hover,.d3:hover{
     padding-bottom: 6px;
     border-bottom: 5px solid black;
-}
-
-.category{
-    background-color: #b2d7f0;
 }
