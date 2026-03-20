@@ -11,22 +11,20 @@ async function loadSuggestion() {//to load all post
   posts.forEach(p => {
     const post = document.createElement('div');
     const fileName = p.file_path ? p.file_path.split('/').pop() : '';
-    
+
     // CHANGE: Added PDF check logic here
     const isPDF = p.file_path && p.file_path.toLowerCase().endsWith('.pdf');
-    const mediaHTML = isPDF 
-        ? `<a href="${p.file_path}" target="_blank" style="color:red; font-weight:bold; text-decoration:none;"><i class="fa-solid fa-file-pdf"></i> View PDF Certificate</a>`
-        : `<img src="${p.file_path}" alt="Achievement" style="width:100%; max-height:150px; object-fit:cover; border-radius:10px; margin-bottom:10px;">`;
+    const mediaHTML = isPDF
+      ? `<a href="${p.file_path}" target="_blank" style="color:red; font-weight:bold; text-decoration:none;"><i class="fa-solid fa-file-pdf"></i> View PDF Certificate</a>`
+      : `<img src="${p.file_path}" alt="Achievement" style="width:100%; max-height:150px; object-fit:cover; border-radius:10px; margin-bottom:10px;">`;
 
     post.innerHTML = `
         <h2>${p.name}</h2>
         <h3>${p.adm_no}</h3>
         <p>${p.desc1}</p>
         <p>Status: ${p.status}</p>
-        ${p.file_path ? mediaHTML : ''}
-        <br>
-        ${p.file_path ? `<a href="${p.file_path}" target="_blank" title="Download" style="font-size:22px;cursor:pointer;text-decoration:none;"><i class="fa-solid fa-download"></i></a>` : ''}
-    `;    
+        ${p.file_path ? `<a href="${p.file_path}" download title ="Download" target="_blank" title="View File" style="display:inline-block;margin-top:8px;padding:6px 14px;background:#2196F3;color:white;border-radius:8px;text-decoration:none;font-size:14px;cursor:pointer;">🔍 ${isPDF ? 'View PDF' : 'View Image'}</a>` : ''}
+    `;
     post.style.justifyItems = 'center';
     post.style.width = '35%';
     post.style.height = '40%';
@@ -60,19 +58,18 @@ async function loadCat(cat) {
   posts.forEach(p => {
     const post = document.createElement('div');
     const isPDF = p.file_path && p.file_path.toLowerCase().endsWith('.pdf');
-    const mediaHTML = isPDF 
-        ? `<a href="${p.file_path}" target="_blank" style="color:red; font-weight:bold; text-decoration:none;"><i class="fa-solid fa-file-pdf"></i> View PDF</a>`
-        : `<img src="${p.file_path}" style="width:100%; border-radius:10px; margin-bottom:10px;">`;
+    const mediaHTML = isPDF
+      ? `<a href="${p.file_path}" target="_blank" style="color:red; font-weight:bold; text-decoration:none;"><i class="fa-solid fa-file-pdf"></i> View PDF</a>`
+      : `<img src="${p.file_path}" style="width:100%; border-radius:10px; margin-bottom:10px;">`;
 
     post.innerHTML = `
     <h2>${p.name}</h2>
     <h3>${p.adm_no}</h3>
     <p>${p.desc1}</p>
     <p>Status: ${p.status}</p>
-    ${p.file_path ? mediaHTML : ''}
     <br>
-    ${p.file_path ? `<a href="${p.file_path}" target="_blank" title="View" style="font-size:22px;cursor:pointer;text-decoration:none;"><i class="fa-solid fa-eye"></i></a>` : ''}
-`;    post.style.justifyItems = 'center';
+     ${p.file_path ? `<a href="${p.file_path}" target="_blank" title="View File" style="display:inline-block;margin-top:8px;padding:6px 14px;background:#2196F3;color:white;border-radius:8px;text-decoration:none;font-size:14px;cursor:pointer;">🔍 ${isPDF ? 'View PDF' : 'View Image'}</a>` : ''}
+`; post.style.justifyItems = 'center';
     post.style.width = '35%';
     post.style.height = '40%';
     post.style.padding = '20px';
@@ -92,7 +89,7 @@ async function loadStatus(status) {
   posts.forEach(p => {
     const post = document.createElement('div');
     const isPDF = p.file_path && p.file_path.toLowerCase().endsWith('.pdf');
-    
+
     post.innerHTML = `
                 <h2>${p.name}</h2>
                 <h3>${p.adm_no}</h3>
