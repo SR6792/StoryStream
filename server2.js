@@ -73,7 +73,7 @@ app.post("/submit", upload.single('file'), async (req, res) => {
             file_path: req.file ? `/uploads/${req.file.filename}` : ""
         };
         const post = await achievement.create(data);
-        res.json(post);
+        res.redirect('/user.html');
     } catch (err) {
         res.status(400).send(err.message);
     }
