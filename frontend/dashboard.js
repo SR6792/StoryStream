@@ -1,8 +1,5 @@
 const table = document.querySelector(".tb");
-index = 0;
-// Make sure your image tag looks like this:
-img.src = achievement.file_path; 
-// This works because file_path already starts with "/uploads/"
+
 async function loadPending(x) {
     try {
         const data = await fetch('/all');
@@ -16,9 +13,9 @@ async function loadPending(x) {
                                     <td>${p.name}</td>
                                     <td>${p.desc1}</td>
                                     <td>
-                                        ${p.file_path 
-                                            ? `<img src="${p.file_path}" style="width:50px; height:50px; object-fit:cover; border-radius:5px; cursor:pointer;" onerror="this.onerror=null; this.src='https://via.placeholder.com/50'; console.log('Error loading:', '${p.file_path}')" onclick="window.open('${p.file_path}')">` 
-                                            : 'No file'}
+                                        ${p.file_path
+                        ? `<img src="${p.file_path}" style="width:50px; height:50px; object-fit:cover; border-radius:5px; cursor:pointer;" onerror="this.onerror=null; this.src='https://via.placeholder.com/50'; console.log('Error loading:', '${p.file_path}')" onclick="window.open('${p.file_path}')">`
+                        : 'No file'}
                                     </td>
                                     <td>
                                         <button class="b11" onclick = "acceptAch('${p._id}')">✅</button>

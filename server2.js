@@ -146,6 +146,10 @@ app.delete('/delete/:id', async (req, res) => {
 
 app.post('/register', async (req, res) => {
     try {
+        const existing = await login.findOne({ Email: req.body.Email });
+        if (existing) {
+            return res.status(400).json({ message: "Email already exists" });
+        }
         await login.create(req.body);
         res.status(200).json({ message: "Register successful" });
     } catch (e) {
@@ -181,7 +185,7 @@ app.post('/google-login', async (req, res) => {
         if (!user) {
             user = await login.create({
                 Email: email,
-                Password: 'google-oauth', 
+                Password: 'google-oauth',
                 role: 'user'
             });
         }

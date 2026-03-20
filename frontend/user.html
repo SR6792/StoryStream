@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,52 +9,62 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <title>register</title>
     <script src="index.js" defer></script>
-    
+
 </head>
+
 <body>
     <nav class="nav1">
         <div class="te1">
             <img src="/frontend/ajce logo.jpg" alt="Ajce" class="img1">
             <h1>Student Achievements Submission Portal</h1>
         </div>
-        
+
         <div class="btns">
             <h1>Hi User</h1>
             <button onclick="location.href='index.html'" class="b2">Logout</button>
         </div>
-        
+
     </nav>
-    
+
 
     <!-- now the part where i show the posts and also to create a new posts -->
     <div class="posts">
         <div class="getpost1">
             <div class="type1">
-                <div class="d4"><h1>All Posts</h1></div>
-                <div class="d1"><h1>LED Wall</h1></div>
-                <div class="d2"><h1>Newsletter</h1></div>
-                <div class="d3"><h1>Social Media</h1></div>
+                <div class="d4">
+                    <h1>All Posts</h1>
+                </div>
+                <div class="d1">
+                    <h1>LED Wall</h1>
+                </div>
+                <div class="d2">
+                    <h1>Newsletter</h1>
+                </div>
+                <div class="d3">
+                    <h1>Social Media</h1>
+                </div>
             </div>
             <div class="getpost">
             </div>
         </div>
         <div class="topost">
             <h1>Achievements</h1>
-            <form class="form1" method="POST" action="/submit",enctype="multipart/form-data">
+            <form class="form1" method="POST" action="/submit" enctype="multipart/form-data">
                 <input type="text" placeholder="Full Name" class="inp1" name="fullname">
                 <input type="text" placeholder="Admission Number" class="inp2" name="adm_no">
                 <input type="text" placeholder="Description" class="inp3" name="desc">
-                <select name="category" class="category" required>  <!--To create a dropdown menu-->
+                <select name="category" class="category" required> <!--To create a dropdown menu-->
                     <option value="" disabled selected>Select</option>
                     <option value="led_wall">Led Wall</option>
                     <option value="newsletter">Newsletter</option>
                     <option value="social">Social Media</option>
                 </select>
                 <!--To upload img-->
-                <input type="file" name="file" accept="image/*,application/pdf" >
+                <input type="file" name="file" accept="image/*,application/pdf">
                 <button class="btn" type="submit">Submit</button>
             </form>
         </div>
-     </div>
+    </div>
 </body>
+
 </html>
