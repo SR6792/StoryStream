@@ -1,0 +1,144 @@
+[{
+  "_id": {
+    "$oid": "6995c944c454ccbb0bc32dea"
+  },
+  "Email": "sooraj.2050in@gmail.com",
+  "Password": "ajce1234",
+  "role": "admin",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6995e0bac454ccbb0bc32dec"
+  },
+  "Email": "jsontodd04in@gmail.com",
+  "Password": "arty1234",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6995e537eca2898ca1ca905e"
+  },
+  "Email": "x1@gmail.com",
+  "Password": "1234",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69997ca06ebf03d6ca96d1da"
+  },
+  "Email": "efv",
+  "Password": "4rtgb",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69997cf5c9d87943722ad2ff"
+  },
+  "Email": "rfv",
+  "Password": "123",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69997df6a7b9b57165040960"
+  },
+  "Email": "4rgb",
+  "Password": "rgb",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69997e7e17e8335fb6911e16"
+  },
+  "Email": "4rgb",
+  "Password": "fv",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69997e8517e8335fb6911e18"
+  },
+  "Email": "fv",
+  "Password": "fv",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69997ecd77b29eac4ad11cb0"
+  },
+  "Email": "gvb",
+  "Password": "rfv",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69997fa46951b63e92983a0a"
+  },
+  "Email": "edf",
+  "Password": "4rfv",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699bc6f820218821ef2fba92"
+  },
+  "Email": "mathew",
+  "Password": "1234",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c48234b0ec60ab73aa6c2"
+  },
+  "Email": "z1@gmail.com",
+  "Password": "123",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c484e4b0ec60ab73aa6c5"
+  },
+  "Email": "z2@gmail.com",
+  "Password": "1234",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c48924b0ec60ab73aa6cf"
+  },
+  "Email": "z1.com",
+  "Password": "123",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699c4c80eae751fdcbd51405"
+  },
+  "Email": "sdc",
+  "Password": "dc",
+  "role": "user",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "699e8c061c28b642baaea64b"
+  },
+  "Email": "dfv",
+  "Password": "sd",
+  "role": "user",
+  "__v": 0
+}]

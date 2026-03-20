@@ -1,91 +1,48 @@
-const a11= document.querySelector(".getpost");
-async function loadSuggestion(){//to load all post
-    a11.innerHTML='';
-    a11.style.overflowY='scroll';
-    const data = await fetch('http://localhost:2000/all');
-        const posts = await data.json();
-        posts.forEach(p=>{
-            const post = document.createElement('div');
-            post.innerHTML = `
-                <h2>${p.name}</h2>
-                <h3>${p.adm_no}</h3>
-                <p>${p.desc1}</p>
-                <p>${p.status}</p>
-            `;
-        post.style.justifyItems='center';
-        post.style.width='35%';
-        post.style.height='40%';
-        post.style.padding='20px';
-        post.style.border='3px solid black';
-        post.style.margin='20px 20px';
-        post.style.overflowY='scroll';
-        post.style.scrollbarWidth='none';
-        post.style.borderRadius = '20px';
-        post.style.backgroundColor=' White';
-        
-        a11.appendChild(post);
-    });
+const a11 = document.querySelector(".getpost");
+// Make sure your image tag looks like this:
+// img.src = achievement.file_path; 
+// This works because file_path already starts with "/uploads/"
+
+async function loadSuggestion() {//to load all post
+  a11.innerHTML = '';
+  a11.style.overflowY = 'scroll';
+  const data = await fetch('/all'); // CHANGE: Removed localhost
+  const posts = await data.json();
+  posts.forEach(p => {
+    const post = document.createElement('div');
+    const fileName = p.file_path ? p.file_path.split('/').pop() : '';
+    
+    // CHANGE: Added PDF check logic here
+    const isPDF = p.file_path && p.file_path.toLowerCase().endsWith('.pdf');
+    const mediaHTML = isPDF 
+        ? `<a href="${p.file_path}" target="_blank" style="color:red; font-weight:bold; text-decoration:none;"><i class="fa-solid fa-file-pdf"></i> View PDF Certificate</a>`
+        : `<img src="${p.file_path}" alt="Achievement" style="width:100%; max-height:150px; object-fit:cover; border-radius:10px; margin-bottom:10px;">`;
+
+    post.innerHTML = `
+        <h2>${p.name}</h2>
+        <h3>${p.adm_no}</h3>
+        <p>${p.desc1}</p>
+        <p>Status: ${p.status}</p>
+        ${p.file_path ? mediaHTML : ''}
+        <br>
+        ${p.file_path ? `<a href="${p.file_path}" target="_blank" title="Download" style="font-size:22px;cursor:pointer;text-decoration:none;"><i class="fa-solid fa-download"></i></a>` : ''}
+    `;    
+    post.style.justifyItems = 'center';
+    post.style.width = '35%';
+    post.style.height = '40%';
+    post.style.padding = '20px';
+    post.style.border = '3px solid black';
+    post.style.margin = '20px 20px';
+    post.style.overflowY = 'scroll';
+    post.style.scrollbarWidth = 'none';
+    post.style.borderRadius = '20px';
+    post.style.backgroundColor = ' White';
+
+    a11.appendChild(post);
+  });
 }
-document.addEventListener("DOMContentLoaded",loadSuggestion);
-//to get all suggestion on loading website(DOMCContentLoaded)
-// const btn1 = document.querySelector(".btn1");
-// btn1.addEventListener('click',async(event)=>{
-//     try{
-//         loadSuggestion();
-//     }
-//     catch(err){
-//         console.log(err);     
-//     }
-// });
+document.addEventListener("DOMContentLoaded", loadSuggestion);
 
-//to enter a suggestion(post)
-const btn = document.querySelector(".btn");
-const inp1=document.querySelector(".inp1");
-const inp2=document.querySelector(".inp2");
-const inp3=document.querySelector(".inp3");
-const cat = document.querySelector(".category");
-if(btn && inp1 && inp2 && inp3){
-    // frontend: c:\... \frontend\index.js
-btn.addEventListener('click', async (event) => {
-  event.preventDefault();//to prevent crashing
-  try {
-    const name = inp1.value.trim();
-    const adm  = inp2.value.trim();
-    const sug  = inp3.value.trim();
-    const ch = cat.value;//which category
-    if (!name || !adm || !sug ||!ch) {
-      alert('Please Fill all the Details');
-      return;
-    }
-
-    // Make sure keys match server. Many examples expect: { name, adm_no, suggestion }
-    const res = await fetch('http://localhost:2000/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name:name, adm_no: adm, desc1: sug ,category: ch})
-    });
-
-    if (!res.ok) {
-      const err = await res.json().catch(()=>({error: res.statusText}));
-      throw new Error(err.error || res.statusText);
-    }
-
-    // refresh list from server (avoid cache)
-    await loadSuggestion(); // your function clears and fetches /all
-
-    // clear form
-    inp1.value = inp2.value = inp3.value =cat.value= '';
-  } catch (err) {
-    console.error(err);
-    alert('Submit failed: ' + err.message);
-  } finally {
-    btn.disabled = false;
-  }
-});
-}
-
-
-//to diff btw ledwall,newsletter,social when click them optional
 const btn1 = document.querySelector(".d1");
 const btn2 = document.querySelector(".d2");
 const btn3 = document.querySelector(".d3");
@@ -93,57 +50,66 @@ const btn4 = document.querySelector(".d4");
 const btn5 = document.querySelector(".d5");
 const btn6 = document.querySelector(".d6");
 
-btn4.style.borderBottom='solid 5px black';
+btn4.style.borderBottom = 'solid 5px black';
 
-async function loadCat(cat){
-  a11.innerHTML='';
-    a11.style.overflowY='scroll';
-    const data = await fetch(`http://localhost:2000/all/${cat}`);
-        const posts = await data.json();
-        posts.forEach(p=>{
-            const post = document.createElement('div');
-            post.innerHTML = `
-                <h2>${p.name}</h2>
-                <h3>${p.adm_no}</h3>
-                <p>${p.desc1}</p>
-                <p>${p.status}</p>
-            `;
-        post.style.justifyItems='center';
-        post.style.width='35%';
-        post.style.height='40%';
-        post.style.padding='20px';
-        post.style.border='3px solid black';
-        post.style.margin='20px 20px';
-        post.style.overflowY='scroll';
-        post.style.scrollbarWidth='none';
-        a11.appendChild(post);
-    });
+async function loadCat(cat) {
+  a11.innerHTML = '';
+  a11.style.overflowY = 'scroll';
+  const data = await fetch(`/all/${cat}`); // CHANGE: Removed localhost
+  const posts = await data.json();
+  posts.forEach(p => {
+    const post = document.createElement('div');
+    const isPDF = p.file_path && p.file_path.toLowerCase().endsWith('.pdf');
+    const mediaHTML = isPDF 
+        ? `<a href="${p.file_path}" target="_blank" style="color:red; font-weight:bold; text-decoration:none;"><i class="fa-solid fa-file-pdf"></i> View PDF</a>`
+        : `<img src="${p.file_path}" style="width:100%; border-radius:10px; margin-bottom:10px;">`;
+
+    post.innerHTML = `
+    <h2>${p.name}</h2>
+    <h3>${p.adm_no}</h3>
+    <p>${p.desc1}</p>
+    <p>Status: ${p.status}</p>
+    ${p.file_path ? mediaHTML : ''}
+    <br>
+    ${p.file_path ? `<a href="${p.file_path}" target="_blank" title="View" style="font-size:22px;cursor:pointer;text-decoration:none;"><i class="fa-solid fa-eye"></i></a>` : ''}
+`;    post.style.justifyItems = 'center';
+    post.style.width = '35%';
+    post.style.height = '40%';
+    post.style.padding = '20px';
+    post.style.border = '3px solid black';
+    post.style.margin = '20px 20px';
+    post.style.overflowY = 'scroll';
+    post.style.scrollbarWidth = 'none';
+    a11.appendChild(post);
+  });
 }
 
-//function to load status
-async function loadStatus(status){
-  a11.innerHTML='';
-    a11.style.overflowY='scroll';
-    const data = await fetch(`http://localhost:2000/${status}`);
-        const posts = await data.json();
-        posts.forEach(p=>{
-            const post = document.createElement('div');
-            post.innerHTML = `
+async function loadStatus(status) {
+  a11.innerHTML = '';
+  a11.style.overflowY = 'scroll';
+  const data = await fetch(`/${status}`); // CHANGE: Removed localhost
+  const posts = await data.json();
+  posts.forEach(p => {
+    const post = document.createElement('div');
+    const isPDF = p.file_path && p.file_path.toLowerCase().endsWith('.pdf');
+    
+    post.innerHTML = `
                 <h2>${p.name}</h2>
                 <h3>${p.adm_no}</h3>
                 <p>${p.desc1}</p>
                 <p>${p.status}</p>
+                ${p.file_path ? `<a href="${p.file_path}" target="_blank" title="View File" style="display:inline-block;margin-top:8px;padding:6px 14px;background:#2196F3;color:white;border-radius:8px;text-decoration:none;font-size:14px;cursor:pointer;">🔍 ${isPDF ? 'View PDF' : 'View Image'}</a>` : ''}
             `;
-        post.style.justifyItems='center';
-        post.style.width='35%';
-        post.style.height='40%';
-        post.style.padding='20px';
-        post.style.border='3px solid black';
-        post.style.margin='20px 20px';
-        post.style.overflowY='scroll';
-        post.style.scrollbarWidth='none';
-        a11.appendChild(post);
-    });
+    post.style.justifyItems = 'center';
+    post.style.width = '35%';
+    post.style.height = '40%';
+    post.style.padding = '20px';
+    post.style.border = '3px solid black';
+    post.style.margin = '20px 20px';
+    post.style.overflowY = 'scroll';
+    post.style.scrollbarWidth = 'none';
+    a11.appendChild(post);
+  });
 }
 
 btn1.addEventListener('click', () => {
@@ -206,7 +172,7 @@ btn6.addEventListener('click', () => {
 });
 
 const logout_btn = document.querySelector(".b2");
-logout_btn.addEventListener('click',()=>{
+logout_btn.addEventListener('click', () => {
   localStorage.removeItem('role');
-  window.location.href='index.html';
-})
+  window.location.href = 'index.html';
+});
