@@ -1,13 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const { OAuth2Client } = require("google-auth-library");
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-
-const GOOGLE_CLIENT_ID = "920151150259-j2em824nr7k0d5u7uassgre8otg2ntk9.apps.googleusercontent.com";
-const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
 
 const app = express();
 app.use(cors());
@@ -170,31 +166,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// Google Sign-In
-app.post('/google-login', async (req, res) => {
-    try {
-        const { credential } = req.body;
-        const ticket = await googleClient.verifyIdToken({
-            idToken: credential,
-            audience: GOOGLE_CLIENT_ID,
-        });
-        const payload = ticket.getPayload();
-        const email = payload.email;
 
-        let user = await login.findOne({ Email: email });
-        if (!user) {
-            user = await login.create({
-                Email: email,
-                Password: 'google-oauth',
-                role: 'user'
-            });
-        }
-        res.status(200).json({ message: "Success", role: user.role });
-    } catch (e) {
-        console.log(e);
-        res.status(400).json({ message: "Google login failed" });
-    }
-});
 
 // --- ROOT ROUTE ---
 app.get('/', (req, res) => {
