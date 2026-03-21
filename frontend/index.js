@@ -1,33 +1,4 @@
-//take value of both email and password
 
-const inp1 = document.querySelector(".email1");
-const inp2 = document.querySelector(".pass1");
-const register_btn = document.querySelector(".reg");
-
-register_btn.addEventListener('click', async (event) => {
-    event.preventDefault();//to prevent crashing
-    try {
-        const email1 = inp1.value.trim();
-        const password1 = inp2.value.trim();
-        if (!email1 || !password1) {
-            alert("Fill both first");
-            return;
-        }
-        const data = await fetch('/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ Email: email1, Password: password1 })//in backend jsut give Email and Password
-        });
-
-        window.location.href = 'user.html';
-        inp1.value = inp2.value = '';
-    }
-    catch (e) {
-        console.log(e)
-    }
-});
 
 const a11 = document.querySelector(".getpost");
 // Make sure your image tag looks like this:
@@ -76,8 +47,7 @@ const btn1 = document.querySelector(".d1");
 const btn2 = document.querySelector(".d2");
 const btn3 = document.querySelector(".d3");
 const btn4 = document.querySelector(".d4");
-const btn5 = document.querySelector(".d5");
-const btn6 = document.querySelector(".d6");
+
 
 btn4.style.borderBottom = 'solid 5px black';
 
@@ -112,33 +82,7 @@ async function loadCat(cat) {
     });
 }
 
-async function loadStatus(status) {
-    a11.innerHTML = '';
-    a11.style.overflowY = 'scroll';
-    const data = await fetch(`/${status}`); // CHANGE: Removed localhost
-    const posts = await data.json();
-    posts.forEach(p => {
-        const post = document.createElement('div');
-        const isPDF = p.file_path && p.file_path.toLowerCase().endsWith('.pdf');
 
-        post.innerHTML = `
-                <h2>${p.name}</h2>
-                <h3>${p.adm_no}</h3>
-                <p>${p.desc1}</p>
-                <p>${p.status}</p>
-                ${p.file_path ? `<a href="${p.file_path}" target="_blank" title="View File" style="display:inline-block;margin-top:8px;padding:6px 14px;background:#2196F3;color:white;border-radius:8px;text-decoration:none;font-size:14px;cursor:pointer;">🔍 ${isPDF ? 'View PDF' : 'View Image'}</a>` : ''}
-            `;
-        post.style.justifyItems = 'center';
-        post.style.width = '35%';
-        post.style.height = '40%';
-        post.style.padding = '20px';
-        post.style.border = '3px solid black';
-        post.style.margin = '20px 20px';
-        post.style.overflowY = 'scroll';
-        post.style.scrollbarWidth = 'none';
-        a11.appendChild(post);
-    });
-}
 
 btn1.addEventListener('click', () => {
     loadCat("led_wall");
@@ -146,8 +90,7 @@ btn1.addEventListener('click', () => {
     btn2.style.borderBottom = 'none';
     btn3.style.borderBottom = 'none';
     btn4.style.borderBottom = 'none';
-    btn5.style.borderBottom = 'none';
-    btn6.style.borderBottom = 'none';
+
 });
 
 btn2.addEventListener('click', () => {
@@ -156,8 +99,7 @@ btn2.addEventListener('click', () => {
     btn1.style.borderBottom = 'none';
     btn3.style.borderBottom = 'none';
     btn4.style.borderBottom = 'none';
-    btn5.style.borderBottom = 'none';
-    btn6.style.borderBottom = 'none';
+
 });
 
 btn3.addEventListener('click', () => {
@@ -166,8 +108,7 @@ btn3.addEventListener('click', () => {
     btn1.style.borderBottom = 'none';
     btn2.style.borderBottom = 'none';
     btn4.style.borderBottom = 'none';
-    btn5.style.borderBottom = 'none';
-    btn6.style.borderBottom = 'none';
+
 });
 
 btn4.addEventListener('click', () => {
@@ -176,69 +117,6 @@ btn4.addEventListener('click', () => {
     btn1.style.borderBottom = 'none';
     btn2.style.borderBottom = 'none';
     btn4.style.borderBottom = '5px solid black';
-    btn5.style.borderBottom = 'none';
-    btn6.style.borderBottom = 'none';
+
 });
 
-// Google Sign-In
-const googleBtn = document.querySelector(".google-btn");
-
-function handleGoogleResponse(response) {
-    fetch('/google-login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ credential: response.credential })
-    })
-        .then(res => res.json())
-        .then(data => {
-            if (data.message === "Success") {
-                alert("Google Sign-Up Successful!");
-                localStorage.setItem('role', data.role);
-                if (data.role === 'admin') {
-                    window.location.href = 'admin.html';
-                } else {
-                    window.location.href = 'user.html';
-                }
-            } else {
-                alert("Google Sign-Up Failed");
-            }
-        })
-        .catch(err => {
-            console.log(err);
-            alert("Google Sign-Up Failed");
-        });
-}
-
-// Initialize Google Sign-In after the GSI library has loaded
-window.addEventListener('load', () => {
-    if (typeof google !== 'undefined' && google.accounts) {
-        google.accounts.id.initialize({
-            client_id: "920151150259-j2em824nr7k0d5u7uassgre8otg2ntk9.apps.googleusercontent.com",
-            callback: handleGoogleResponse,
-        });
-
-        // Render a hidden Google button, then trigger it from the custom button
-        const hiddenDiv = document.createElement('div');
-        hiddenDiv.id = 'g_id_signin';
-        hiddenDiv.style.position = 'absolute';
-        hiddenDiv.style.opacity = '0';
-        hiddenDiv.style.pointerEvents = 'none';
-        document.body.appendChild(hiddenDiv);
-
-        google.accounts.id.renderButton(hiddenDiv, {
-            type: 'standard',
-            size: 'large',
-        });
-    } else {
-        console.error("Google Identity Services library failed to load.");
-    }
-});
-
-googleBtn.addEventListener('click', () => {
-    const hiddenBtn = document.querySelector('#g_id_signin div[role="button"]');
-    if (hiddenBtn) {
-        hiddenBtn.click();
-    } else {
-        alert("Google Sign-In is not available. Please try again later.");
-    }
-});
