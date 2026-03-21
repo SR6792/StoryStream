@@ -178,7 +178,7 @@ body,
     margin-top: 10px;
     border-radius: 15px;
     padding: 20px;
-    width: 100%;
+    width: fit-content;
     height: 100px;
     align-items: center;
 }
