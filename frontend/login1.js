@@ -41,6 +41,7 @@ login_btn.addEventListener('click', async (event) => {
 
 // Google Sign-In
 const googleBtn = document.querySelector(".google-btn");
+let googleReady = false;
 
 function handleGoogleResponse(response) {
     fetch('/google-login', {
@@ -75,28 +76,15 @@ window.addEventListener('load', () => {
             client_id: "920151150259-j2em824nr7k0d5u7uassgre8otg2ntk9.apps.googleusercontent.com",
             callback: handleGoogleResponse,
         });
-
-        // Render a hidden Google button, then trigger it from the custom button
-        const hiddenDiv = document.createElement('div');
-        hiddenDiv.id = 'g_id_signin';
-        hiddenDiv.style.position = 'absolute';
-        hiddenDiv.style.opacity = '0';
-        hiddenDiv.style.pointerEvents = 'none';
-        document.body.appendChild(hiddenDiv);
-
-        google.accounts.id.renderButton(hiddenDiv, {
-            type: 'standard',
-            size: 'large',
-        });
+        googleReady = true;
     } else {
         console.error("Google Identity Services library failed to load.");
     }
 });
 
 googleBtn.addEventListener('click', () => {
-    const hiddenBtn = document.querySelector('#g_id_signin div[role="button"]');
-    if (hiddenBtn) {
-        hiddenBtn.click();
+    if (googleReady && typeof google !== 'undefined' && google.accounts) {
+        google.accounts.id.prompt();
     } else {
         alert("Google Sign-In is not available. Please try again later.");
     }

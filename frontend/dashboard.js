@@ -14,7 +14,7 @@ async function loadPending(x) {
                                     <td>${p.desc1}</td>
                                     <td>
                                         ${p.file_path
-                        ? `<img src="${p.file_path}" style="width:50px; height:50px; object-fit:cover; border-radius:5px; cursor:pointer;" onerror="this.onerror=null; this.src='https://via.placeholder.com/50'; console.log('Error loading:', '${p.file_path}')" onclick="window.open('${p.file_path}')">`
+                        ? `<img src="${p.file_path}" alternate="click here" style="width:50px; height:50px; object-fit:cover; border-radius:5px; cursor:pointer;" onerror="this.onerror=null; this.src='https://via.placeholder.com/50'; console.log('Error loading:', '${p.file_path}')" onclick="window.open('${p.file_path}')">`
                         : 'No file'}
                                     </td>
                                     <td>
