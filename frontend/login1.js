@@ -27,6 +27,15 @@ login_btn.addEventListener('click', async (event) => {
             if (resp.role == 'admin') {
                 window.location.href = 'admin.html'
             }
+            else if (resp.role =='social'){
+                window.location.href='social.html'
+            }
+            else if (resp.role == 'led_wall'){
+                window.location.href='led_wall.html'
+            }
+            else if(resp.role == 'newsletter'){
+                window.location.href='newsletter.html'
+            }
             else {
                 window.location.href = 'user.html'
             }

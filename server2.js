@@ -105,6 +105,15 @@ app.get('/:status', async (req, res) => {
     }
 });
 
+app.get('/supervised/:cat', async (req, res) => {
+    try {
+        const cat = req.params.cat;
+        const p = await achievement.find({ category: cat, status: 'approved' });
+        res.json(p);
+    } catch (err) {
+        res.status(400).send("Error");
+    }
+});
 // Update status to Approved
 app.patch('/approve/:id', async (req, res) => {
     try {
@@ -173,6 +182,9 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
 });
 
+
+// special admin dashboard for incharges of (where they can only view that)
+//
 // --- START SERVER ---
 app.listen(2000, () => {
     console.log("Server is running on Port 2000");
