@@ -1,10 +1,20 @@
-# StoryStream
-StoryConnect is a web-based platform where users can write and share short stories with the community, as well as communicate with other users through a simple database-driven chat system.
+# StoryStream - A Student Achievement Submission Platform
+Engineered from the ground up without frontend frameworks, StoryStream is a live student achievement portal. It features a responsive HTML/CSS/JS interface and a robust Express backend connected to a MongoDB database, hosted directly on an AWS EC2 instance.
 
-so i have 3 html files
-1)main file
-2) adn 3) register and login file
+Hosted Link - http://65.0.75.47/
 
-similar for frontend js i have 3 js files for each of above
+Demo Account 
+Email - xyz2020@gmail.com |Password - 1234
 
-now admin goes to another window with all his privileges while user can only enter achievments
+Tech Stack
+Frontend - HTML,CSS,JS
+Backend - Express
+Database - MongoDB
+
+Key Features
+
+Student Submission Portal: Provides a streamlined, responsive interface for students to easily upload and describe their academic and extracurricular milestones.
+Content Centralization: Acts as a unified pipeline to gather and format student achievements intended for campus-wide distribution, such as LED walls, newsletters, and social media.
+Admin Moderation Dashboard: Features a secure admin panel allowing moderators to review, approve, or delete pending submissions in real time.
+Persistent Data Storage: Utilizes a MongoDB database to reliably store, query, and manage user submissions and administrative actions.
+Live Cloud Hosting: Configured and deployed on an AWS EC2 instance, demonstrating practical server management and cloud hosting capabilities.
